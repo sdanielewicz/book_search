@@ -33,7 +33,7 @@ input saveBookInput {
   }
 
 type Query {
-me:user
+me:User
 }
 
 type Mutation {
