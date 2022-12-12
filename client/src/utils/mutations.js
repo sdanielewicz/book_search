@@ -1,20 +1,28 @@
-import { gql } from '@apollo/client';
+import  {gql}  from '@apollo/client';
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     createMatchup(email: $email, password: $password) {
       token
-      user
+      user {
+        _id
+        username
+      }
     }
   }
 `;
 
 
 export const ADD_USER = gql`
-  mutation addUser($name: String!, $email: String!, $password: String!) {
-    createMatchup(name: $name, email: $email, password: $password) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    createMatchup(username: $username, email: $email, password: $password) {
       token
-      user
+      user {
+        username
+        _id
+        email
+      
+      }
     }
   }
 `;
@@ -39,8 +47,8 @@ export const SAVE_BOOK = gql`
 
 export const REMOVE_BOOK = gql`
   mutation removeBook($bookId: String!) {
-    createMatchup(bookId: $bookId) {
-        name
+    removeBook(bookId: $bookId) {
+        usernname
         _id
         bookCount
         savedBooks {
