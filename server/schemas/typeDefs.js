@@ -24,10 +24,10 @@ type Auth {
 }
 
 input saveBookInput {
-    authors: [String]
-    title: String
-    description: String
     bookId: String
+    authors: [String]
+    description: String
+    title: String
     image: String
     link: String
   }

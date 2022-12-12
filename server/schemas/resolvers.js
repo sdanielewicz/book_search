@@ -8,7 +8,9 @@ Query: {
     me: 
     async (parent, args, context) => {
         if (context.user) {
-          return User.findOne({ _id: context.user._id });
+          const me = User.findOne({ _id: context.user._id }).select("-__v -password");
+          console.log(me);
+          return me;
         }
         throw new AuthenticationError('You need to be logged in!');
     },
@@ -55,11 +57,11 @@ async (parent, args, context) => {
 },
 
 saveBook:
-async (parent, args, context) => {
+async (parent, {input}, context) => {
   if(context.user){
     const updatedUser = await User.findOneAndUpdate(
       { _id: context.user._id },
-      { $addToSet: { savedBooks: body } },
+      { $addToSet: { savedBooks: input } },
       { new: true, runValidators: true }
     );
     return updatedUser;
